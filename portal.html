@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista de Alumnos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="dise.css">
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <a href="login.html"  class="boton">Cerra cesion</a>
+        <h1>Lista de Alumnos</h1>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Ciudad</th>
+                    <th>Departamento</th>
+                    <th>N.Dui</th>
+                    <th>Tipo de Sangre</th>
+                    <th>Fecha de Nacimiento</th>
+                </tr>
+            </thead>
+            <tbody id="data"></tbody>
+        </table>
+    </div>
+
+    <script>
+        let getData = JSON.parse(localStorage.getItem('userProfile')) || [];
+
+        function showInfo(users = getData) {
+            const userInfo = document.getElementById("data");
+            userInfo.innerHTML = ""; // Limpiar tabla
+            users.forEach(element => {
+                let createElement = `<tr>
+                    <td>${element.employeeCodigo}</td>
+                    <td>${element.employeeName}</td>
+                    <td>${element.employeeAge}</td>
+                    <td>${element.employeeCity}</td>
+                    <td>${element.employeeDepar}</td>
+                    <td>${element.employeeNdui}</td>
+                    <td>${element.employeePost}</td>
+                    <td>${element.startDate}</td>
+                </tr>`;
+                userInfo.innerHTML += createElement;
+            });
+        }
+
+        showInfo(); // Llama a la función para mostrar los alumnos
+    </script>
+    <div id="chatContainer" class="mt-4">
+        <h2>Chat con el Admin</h2>
+        <div id="messageList" style="height: 200px; overflow-y: auto; border: 1px solid #ddd; padding: 5px;"></div>
+        <input type="text" id="messageInput" placeholder="Escribe tu mensaje..." class="form-control">
+        <button id="sendMessageBtn" class="btn btn-primary mt-2">Enviar</button>
+        <button id="clearChatBtn" class="btn btn-danger">Vaciar Chat</button>
+    </div>
+    <script src="chatM.js"></script>
+</body>
+</html>
